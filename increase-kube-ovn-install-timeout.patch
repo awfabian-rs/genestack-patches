@@ -1,0 +1,13 @@
+diff --git a/bin/install-kube-ovn.sh b/bin/install-kube-ovn.sh
+index c46ba90..5308a67 100755
+--- a/bin/install-kube-ovn.sh
++++ b/bin/install-kube-ovn.sh
+@@ -146,7 +146,7 @@ helm_command=(
+     helm upgrade --install "$SERVICE_NAME_DEFAULT" "$HELM_CHART_PATH"
+     --version "${SERVICE_VERSION}"
+     --namespace="$SERVICE_NAMESPACE"
+-    --timeout 120m
++    --timeout 720h
+     --create-namespace
+ 
+     "${overrides_args[@]}"

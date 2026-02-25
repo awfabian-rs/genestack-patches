@@ -1,0 +1,16 @@
+You need this to make OVN loadbalancers work in the hyperconverged lab,
+and then that breaks amphora LBs.
+
+diff --git a/base-helm-configs/octavia/octavia-helm-overrides.yaml b/base-helm-configs/octavia/octavia-helm-overrides.yaml
+index 73f05c2..a409c17 100644
+--- a/base-helm-configs/octavia/octavia-helm-overrides.yaml
++++ b/base-helm-configs/octavia/octavia-helm-overrides.yaml
+@@ -120,6 +120,8 @@ conf:
+       service_type: load-balancer
+       valid_interfaces: internal
+     neutron:
++      endpoint_override: http://neutron-server.openstack.svc.cluster.local:9696
++      region_name: RegionOne
+       endpoint_type: internalURL
+       valid_interfaces: internal
+     nova:

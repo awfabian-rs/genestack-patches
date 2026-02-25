@@ -1,0 +1,11 @@
+diff --git a/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml b/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+index aceafdc..fa98ea5 100644
+@@ -27,7 +27,7 @@ MASTER_NODES_LABEL: "kube-ovn/role=master"
+ networking:
+   # NET_STACK defaults to ipv4
+   NET_STACK: ipv4
+-  ENABLE_SSL: true
++  ENABLE_SSL: false
+   # network type could be geneve or vlan
+   NETWORK_TYPE: geneve
+   # tunnel type could be geneve, vxlan or stt

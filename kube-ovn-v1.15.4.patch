@@ -1,0 +1,88 @@
+diff --git a/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml b/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+index aceafdc..ce2aafc 100644
+--- a/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
++++ b/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+@@ -4,13 +4,13 @@
+ ---
+ global:
+   registry:
+-    address: ghcr.io/rackerlabs/genestack-images
++    address: docker.io/kubeovn
+     imagePullSecrets: []
+   images:
+     kubeovn:
+       repository: kube-ovn
+       vpcRepository: vpc-nat-gateway
+-      tag: v1.13.14
++      tag: v1.15.4
+       support_arm: true
+       thirdparty: true
+ 
+diff --git a/base-kustomize/ovn-backup/base/ovn-backup.yaml b/base-kustomize/ovn-backup/base/ovn-backup.yaml
+index 861c701..e2d1fb9 100644
+--- a/base-kustomize/ovn-backup/base/ovn-backup.yaml
++++ b/base-kustomize/ovn-backup/base/ovn-backup.yaml
+@@ -50,7 +50,7 @@ spec:
+                 - secretRef:
+                     name: ovn-backup-swift-tempauth-account
+               command: ["/backup-script/ovn-backup.sh"]
+-              image: docker.io/kubeovn/kube-ovn:v1.13.13
++              image: docker.io/kubeovn/kube-ovn:v1.15.4
+               imagePullPolicy: IfNotPresent
+               volumeMounts:
+                 - name: backup
+diff --git a/docs/genestack-structure-and-files.md b/docs/genestack-structure-and-files.md
+index 80e9d78..a678b44 100644
+--- a/docs/genestack-structure-and-files.md
++++ b/docs/genestack-structure-and-files.md
+@@ -49,7 +49,7 @@ The `helm-chart-versions.yaml` file, located at `/etc/genestack/helm-chart-versi
+     ironic: 2024.2.121+13651f45-628a320c
+     keystone: 2024.2.386+13651f45-628a320c
+     kube-event-exporter: 3.6.3
+-    kube-ovn: v1.13.14
++    kube-ovn: v1.15.4
+     libvirt: 2024.2.92+628a320c
+     longhorn: 1.8.0
+     magnum: 2024.2.157+13651f45-628a320c
+diff --git a/docs/infrastructure-ovn-db-backup.md b/docs/infrastructure-ovn-db-backup.md
+index 3c4ef7e..4bd96e6 100644
+--- a/docs/infrastructure-ovn-db-backup.md
++++ b/docs/infrastructure-ovn-db-backup.md
+@@ -84,7 +84,7 @@ spec:
+       - "/usr/bin/sleep"
+     args:
+       - "infinity"
+-    image: docker.io/kubeovn/kube-ovn:v1.13.13
++    image: docker.io/kubeovn/kube-ovn:v1.15.4
+     volumeMounts:
+     - mountPath: /etc/ovn
+       name: host-config-ovn
+diff --git a/docs/ovn-troubleshooting.md b/docs/ovn-troubleshooting.md
+index 4005d83..8a4bc9a 100644
+--- a/docs/ovn-troubleshooting.md
++++ b/docs/ovn-troubleshooting.md
+@@ -16,9 +16,9 @@ openstack server show ${INSTANCE_UUID} -c hypervisor_hostname
+ ## Kube-OVN kubectl plugin
+ 
+ - Kube-OVN has a `kubectl` plugin.
+-- You can see documentation at [the Kube-OVN documentation](https://kubeovn.github.io/docs/v1.13.x/en/)
++- You can see documentation at [the Kube-OVN documentation](https://kubeovn.github.io/docs/v1.15.x/en/)
+ - You should install it from wherever you would like to use `kubectl` from, as described
+-      [here](https://kubeovn.github.io/docs/v1.13.x/en/ops/kubectl-ko/#plugin-installation)
++      [here](https://kubeovn.github.io/docs/v1.15.x/en/ops/kubectl-ko/#plugin-installation)
+   - However, you will also find it already on installed on _Genestack_ Kubernetes
+       nodes, so you can use it with `kubectl` there, if desired.
+ - You can use this to run many OVS commands for a particular node
+diff --git a/helm-chart-versions.yaml b/helm-chart-versions.yaml
+index 521fa54..8167486 100755
+--- a/helm-chart-versions.yaml
++++ b/helm-chart-versions.yaml
+@@ -18,7 +18,7 @@ charts:
+   ironic: 2024.2.121+13651f45-628a320c
+   keystone: 2024.2.386+13651f45-628a320c
+   kubernetes-event-exporter: 3.6.3
+-  kube-ovn: v1.13.14
++  kube-ovn: v1.15.4
+   kube-prometheus-stack: 78.3.0
+   libvirt: 2024.2.94+912f85d38
+   loki: 6.43.0
