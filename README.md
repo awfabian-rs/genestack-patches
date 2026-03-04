@@ -53,3 +53,11 @@
     - show-acl-bug.sh
         - Shows the bug where we lose ACLs on kube-ovn-controller
           restart.
+    - neutron-ovn-acl-repro.sh
+        - The cleaner demonstration of the bug and replacing ACLs I
+          should've done instead of `show-acl-bug.sh`
+        - This creates some stuff that restarting Kube-OVN-controller
+          garbage collects
+    - readd-acls.sh
+        - The ACL re-adding command, as shown in comments of
+          neutron-ovn-acl-repro.sh
