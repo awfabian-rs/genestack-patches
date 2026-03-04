@@ -13,13 +13,17 @@
           leave it hanging and go troubleshoot stuff.
     - kube-ovn-v1.14.15.patch
         - make base genestack reflect Kube-OVN v1.14.15
-    - kube-ovn-v1.15.4.patch
+    - kube-ovn-v1.15.4-gc-\d+.patch
         - reverse apply `kube-ovn-v1.14.15.patch` before this
         - Install _Kube-OVN_ v1.15
         - **Pulls from docker.io at the moment because genestack-images
           doesn't have a v1.15 image**
             - so we probably need to get that in there and this needs
               to change
+        - GC interval variants:
+            - 0: No GC
+            - 15: 15 seconds, fast but should work in a hyperconverged lab
+            - 360: a production default
     - octavia-ovn-hyperconverged.patch
         - The Neutron URL needs overriding to create OVN LBs
         - I don't know why production doesn't have a similar problem
