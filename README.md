@@ -50,3 +50,6 @@
         - Don't forget that /etc overrides the base
             - and that for testing in the hyperconverged lab, I mostly
               just hacked patches on the base
+    - show-acl-bug.sh
+        - Shows the bug where we lose ACLs on kube-ovn-controller
+          restart.
