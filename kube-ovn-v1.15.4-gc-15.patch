@@ -1,15 +1,8 @@
 diff --git a/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml b/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
-index aceafdc..b05532d 100644
+index aceafdc..3a84a0e 100644
 --- a/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
 +++ b/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
-@@ -4,13 +4,13 @@
- ---
- global:
-   registry:
--    address: ghcr.io/rackerlabs/genestack-images
-+    address: docker.io/kubeovn
-     imagePullSecrets: []
-   images:
+@@ -10,7 +10,7 @@ global:
      kubeovn:
        repository: kube-ovn
        vpcRepository: vpc-nat-gateway
@@ -17,18 +10,18 @@ index aceafdc..b05532d 100644
 +      tag: v1.15.4
        support_arm: true
        thirdparty: true
-
+ 
 @@ -91,7 +91,7 @@ ipv4:
    PINGER_EXTERNAL_DOMAIN: "opendns.com."
-
+ 
  performance:
 -  GC_INTERVAL: 0
 +  GC_INTERVAL: 15
    INSPECT_INTERVAL: 300
    OVS_VSCTL_CONCURRENCY: 150
-
+ 
 diff --git a/base-kustomize/ovn-backup/base/ovn-backup.yaml b/base-kustomize/ovn-backup/base/ovn-backup.yaml
-index 861c701..e2d1fb9 100644
+index 861c701..070f0dc 100644
 --- a/base-kustomize/ovn-backup/base/ovn-backup.yaml
 +++ b/base-kustomize/ovn-backup/base/ovn-backup.yaml
 @@ -50,7 +50,7 @@ spec:
@@ -36,7 +29,7 @@ index 861c701..e2d1fb9 100644
                      name: ovn-backup-swift-tempauth-account
                command: ["/backup-script/ovn-backup.sh"]
 -              image: docker.io/kubeovn/kube-ovn:v1.13.13
-+              image: docker.io/kubeovn/kube-ovn:v1.15.4
++              image: ghcr.io/rackerlabs/genestack-images/kube-ovn:v1.15.4
                imagePullPolicy: IfNotPresent
                volumeMounts:
                  - name: backup
@@ -54,7 +47,7 @@ index 80e9d78..a678b44 100644
      longhorn: 1.8.0
      magnum: 2024.2.157+13651f45-628a320c
 diff --git a/docs/infrastructure-ovn-db-backup.md b/docs/infrastructure-ovn-db-backup.md
-index 3c4ef7e..4bd96e6 100644
+index 3c4ef7e..888cc87 100644
 --- a/docs/infrastructure-ovn-db-backup.md
 +++ b/docs/infrastructure-ovn-db-backup.md
 @@ -84,7 +84,7 @@ spec:
@@ -62,7 +55,7 @@ index 3c4ef7e..4bd96e6 100644
      args:
        - "infinity"
 -    image: docker.io/kubeovn/kube-ovn:v1.13.13
-+    image: docker.io/kubeovn/kube-ovn:v1.15.4
++    image: ghcr.io/rackerlabs/genestack-images/kube-ovn:v1.15.4
      volumeMounts:
      - mountPath: /etc/ovn
        name: host-config-ovn
@@ -72,7 +65,7 @@ index 4005d83..8a4bc9a 100644
 +++ b/docs/ovn-troubleshooting.md
 @@ -16,9 +16,9 @@ openstack server show ${INSTANCE_UUID} -c hypervisor_hostname
  ## Kube-OVN kubectl plugin
-
+ 
  - Kube-OVN has a `kubectl` plugin.
 -- You can see documentation at [the Kube-OVN documentation](https://kubeovn.github.io/docs/v1.13.x/en/)
 +- You can see documentation at [the Kube-OVN documentation](https://kubeovn.github.io/docs/v1.15.x/en/)
