@@ -68,3 +68,10 @@
     - acl-count.sh
         - just `grep -c` the `neutron:security_group_rule_id` from the
           NB
+    - get-dt.sh
+        - get a timestamp for checking Kube-OVN pod restarts
+        - **source it** `. get-dt.sh` or `source get-dt.sh`
+    - check-pods-restarted.sh
+        - get a list of pods restarted since DT
+    - check-pods-not-restarted.sh
+        - get a list of pods NOT restarted since DT
