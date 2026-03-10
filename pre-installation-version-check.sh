@@ -11,7 +11,6 @@ echo "BASE TARGET /opt/genestack overrides image: $(gojq -r --yaml-input .global
 echo "BASE TARGET genestack helm-chart-version: $(gojq --yaml-input -r '.charts.["kube-ovn"]' /opt/genestack/helm-chart-versions.yaml)"
 echo "BASE TARGET ENABLE_SSL: $(gojq --yaml-input .networking.ENABLE_SSL /opt/genestack/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml)"
 echo "BASE IMAGE TAG: $(gojq -r --yaml-input .global.images.kubeovn.tag /opt/genestack/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml)"
-echo "NOTE: 15.4 current needs to pull from docker.io, not ghcr.io!"
 echo "BASE IMAGE REGISTRY: $(gojq -r --yaml-input .global.registry.address /opt/genestack/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml)"
 echo
 echo "ETC TARGET helm-chart-version: $(gojq --yaml-input -r '.charts.["kube-ovn"]' /etc/genestack/helm-chart-versions.yaml)"
