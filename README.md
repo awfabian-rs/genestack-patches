@@ -65,3 +65,6 @@
     - readd-acls.sh
         - The ACL re-adding command, as shown in comments of
           neutron-ovn-acl-repro.sh
+    - acl-count.sh
+        - just `grep -c` the `neutron:security_group_rule_id` from the
+          NB
