@@ -83,3 +83,5 @@
 	        directories
 	  - ovn-database-backup.sh
 	      - backup the OVN database
+	  - dump-db.sh
+	      - script to dump the Neutron database
