@@ -1,5 +1,21 @@
 #!/bin/bash
 
+if ! awk '
+/kube_network_plugin:/ {
+    found=1
+    if ($2=="none") exit 0
+    else exit 1
+}
+END {
+    if (!found) exit 1
+}
+' /etc/genestack/inventory/group_vars/k8s_cluster/k8s-cluster.yml
+then
+echo "k8s-cluster.yml has kube_network_plugin value other than none, or it's missing"
+echo "kubespray may think it should install OVN"
+echo "DO NOT PROCEED WITHOUT FIXING THIS"
+exit 1
+fi
 echo "ETC tends to show some nulls, meaning the value didn't or doesn't get overridden"
 echo
 echo "CURRENT chart app version: $(helm -n kube-system list -o json | jq -r '.[] | .app_version')"
@@ -7,6 +23,7 @@ echo "CURRENT ENABLE_SSL: $(helm -n kube-system get values kube-ovn -o json  | j
 false)"
 echo "CURRENT IMAGE TAG: $(helm -n kube-system get values kube-ovn | gojq -r --yaml-input .global.images.kubeovn.tag)"
 echo "CURRENT GC_INTERVAL: $(helm -n kube-system get values kube-ovn | gojq -r --yaml-input .performance.GC_INTERVAL)"
+echo "CURRENT RUNNING OVN-CENTRAL POD IMAGE(S): $(kubectl -n kube-system get pod -l app=ovn-central -o json | jq -r '.items[].spec.containers[0].image' | uniq)"
 echo
 echo "BASE TARGET /opt/genestack overrides image: $(gojq -r --yaml-input .global.images.kubeovn.tag /opt/genestack/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml)"
 echo "BASE TARGET genestack helm-chart-version: $(gojq --yaml-input -r '.charts.["kube-ovn"]' /opt/genestack/helm-chart-versions.yaml)"
