@@ -88,3 +88,5 @@
 	  - check-ovn-leaders.sh
 	      - check for OVN leaders
 	      - every leader column should have one `true`
+	  - create-openstack-admin-client.sh
+	      - create an OpenStack admin client pod
