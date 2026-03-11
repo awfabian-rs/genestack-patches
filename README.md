@@ -79,4 +79,7 @@
         - ping the join network for all of the Kube-OVN pods since we
           once had a problem with this
     - kubectl-ko-nsb-status.sh
-	- helper script for collecting NB and SB status info in directories
+	      - helper script for collecting NB and SB status info in
+	        directories
+	  - ovn-database-backup.sh
+	      - backup the OVN database
