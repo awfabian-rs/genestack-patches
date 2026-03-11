@@ -75,3 +75,8 @@
         - get a list of pods restarted since DT
     - check-pods-not-restarted.sh
         - get a list of pods NOT restarted since DT
+    - ping-join-network.pl
+        - ping the join network for all of the Kube-OVN pods since we
+          once had a problem with this
+    - kubectl-ko-nsb-status.sh
+	- helper script for collecting NB and SB status info in directories
