@@ -1,0 +1,44 @@
+Based on commit 46d9e4e25 in /etc/genestack on the DFW Dev overseer
+at the time I created this patch.
+
+Just apply it manually if stuff moves around. Obviously, you just need
+to update /etc/genestack/helm-chart-versions.yaml and
+/etc/genestack/helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+with the Kube-OVN version
+
+diff --git a/helm-chart-versions.yaml b/helm-chart-versions.yaml
+index 432c9ef..7b37cb5 100644
+--- a/helm-chart-versions.yaml
++++ b/helm-chart-versions.yaml
+@@ -16,7 +16,7 @@ charts:
+   ironic: 2024.2.121+13651f45-628a320c
+   keystone: 2024.2.386+13651f45-628a320c
+   kubernetes-event-exporter: 3.6.3
+-  kube-ovn: v1.14.15
++  kube-ovn: v1.15.4
+   libvirt: 2024.2.94+912f85d38
+   loki: 6.43.0
+   longhorn: 1.9.2
+diff --git a/helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml b/helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+index aa468fd..c14a306 100644
+--- a/helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
++++ b/helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
+@@ -1,11 +1,15 @@
+ ---
+-# THE GLOBAL SECTION CAN BE REMOVED ONCE: https://github.com/rackerlabs/genestack/pull/1338
+-# IS MERGED.  We no longer will need to override the container tag
++# THE GLOBAL SECTION CAN BE REMOVED ONCE:
++# gojq -r --yaml-input .global.images.kubeovn.tag \
++# /opt/genestack/base-helm-configs/kube-ovn/kube-ovn-helm-overrides.yaml
++#
++# shows v1.15.4
++# We no longer will need to override the image tag
+
+ global:
+   images:
+     kubeovn:
+-      tag: v1.14.15
++      tag: v1.15.4
+
+ networking:
+   ENABLE_ECMP: true
