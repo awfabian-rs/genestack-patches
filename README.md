@@ -90,3 +90,9 @@
 	      - every leader column should have one `true`
 	  - create-openstack-admin-client.sh
 	      - create an OpenStack admin client pod
+	  - check-pod-node-and-node-status.sh
+	      - Read a list of pods from STDIN, then output them sorted by
+	        node and show the node status.
+	     - Helpful for identifying pods on not ready or bad nodes, which
+	       comes up a lot.
+
