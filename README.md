@@ -95,4 +95,8 @@
 	        node and show the node status.
 	     - Helpful for identifying pods on not ready or bad nodes, which
 	       comes up a lot.
+	  - filter-hex-blobs.sh
+	      - The exact UUIDs often don't help much in the output, so
+	        so this script just changes them to unique but shorter
+	        identifiers.
 
