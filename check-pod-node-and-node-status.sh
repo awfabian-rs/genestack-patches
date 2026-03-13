@@ -4,6 +4,7 @@
 #
 # Helpful for identifying pods on not ready or bad nodes, which comes
 # up a lot.
+
 set -euo pipefail
 
 mapfile -t pods
@@ -16,7 +17,7 @@ awk '
     next
   }
   {
-    print $1, $2, node_status[$2]
+    print $2, node_status[$2], $1
   }
 ' \
 <(kubectl get nodes -o json \
@@ -34,4 +35,6 @@ awk '
 <(kubectl -n kube-system get pod "${pods[@]}" \
   -o custom-columns=POD:.metadata.name,NODE:.spec.nodeName \
   --no-headers) \
-| sort -k2,2 -k1,1
+| sort -s -k3,3 \
+| sort -s -k1,1 \
+| sort -s -k2,2
