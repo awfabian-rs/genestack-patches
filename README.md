@@ -99,4 +99,11 @@
 	      - The exact UUIDs often don't help much in the output, so
 	        so this script just changes them to unique but shorter
 	        identifiers.
+	  - check-ovn-leaders-from-pods.sh
+	      - Lists each pod and component and <bool>/<bool> for whether
+	        for <label>/<actual daemon> as to whether that pod functions
+	        as the leader for that component.
+	      - OVN central logs frequently list patch mismatches trying to
+	        identify the leader, which frequently concerns me that the
+	        daemon may have changed leader, but the patch doesn't work.
 
